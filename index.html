@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מעקב כדורים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module" src="script.js"></script>
+</head>
+<body>
+    <div id="auth-container" class="container text-center mb-4">
+         <div id="login-view" style="display: none;">
+             <h2 class="text-xl font-semibold mb-4">התחברות למעקב כדורים</h2>
+             <p class="mb-4 text-sm text-gray-600">התחבר עם חשבון גוגל כדי לשמור ולסנכרן את הנתונים שלך בין מכשירים.</p>
+             <button id="login-btn" class="btn-primary w-auto inline-flex items-center">
+                 <svg class="w-4 h-4 mr-2 -ml-1" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 381.5 512 244 512 109.8 512 0 402.2 0 260.8S109.8 8 244 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H244V256h244v5.8z"></path></svg>
+                 התחבר עם Google
+             </button>
+         </div>
+         <div id="user-info" class="flex justify-between items-center" style="display: none;">
+             <span id="user-name" class="text-sm text-gray-700"></span>
+             <button id="logout-btn" class="btn-secondary !text-xs !py-1 !px-2 !mt-0 !w-auto">התנתק</button>
+         </div>
+    </div>
+
+    <div id="app-container" class="container" style="display: none;">
+        <div id="loading-indicator" class="text-center py-10" style="display: none;">
+            <p class="text-gray-500">טוען נתונים...</p>
+        </div>
+
+        <div id="page-dashboard" class="page">
+            <h1 class="text-2xl font-bold text-center mb-6">מעקב כדורים</h1>
+            <div id="initial-setup" class="status-item" style="display: none;">
+                 <h2 class="text-lg font-semibold mb-2">הגדרה ראשונית</h2>
+                 <p class="mb-4 text-sm">נראה שזו הפעם הראשונה עם משתמש זה. אנא הגדר את הרכישה האחרונה והמלאי ההתחלתי.</p>
+                 <button id="setup-now-btn" class="btn-primary">התחל הגדרה</button>
+            </div>
+            <div id="dashboard-view" style="display: none;">
+                <div class="grid grid-cols-2 gap-4 mb-4"> <div class="status-item !mb-0 !bg-green-50 border border-green-200 col-span-1"> <h2 class="!text-green-800">כמות נוכחית</h2> <p id="current-pills" class="!text-green-700">-</p> </div> <div class="status-item !mb-0 col-span-1"> <h2>תאריך רכישה הבא</h2> <p id="next-purchase-date">-</p> <p id="days-until-purchase" class="subtext"></p> </div> </div>
+                <div class="status-item !bg-blue-50 border border-blue-200"> <h2 class="!text-blue-800 mb-2">תיעוד צריכה (היום)</h2> <div class="log-buttons"> <button class="log-button btn-tertiary" data-amount="0">לקחתי 0</button> <button class="log-button btn-tertiary" data-amount="1">לקחתי 1</button> <button class="log-button btn-tertiary" data-amount="2">לקחתי 2</button> <button id="log-other-btn" class="btn-secondary">אחר...</button> </div> <p id="last-log-time" class="subtext !text-xs"></p> </div>
+                 <div class="grid grid-cols-2 gap-4 mb-4"> <div class="status-item !mb-0"> <h2>צפי לסיום (מתוכנן)</h2> <p id="days-remaining" class="!text-base">- ימים</p> <p id="estimated-end-date" class="subtext"></p> </div> <div class="status-item !mb-0 !bg-gray-100"> <h2 class="!text-gray-600">רכישה אחרונה</h2> <p id="last-purchase-info" class="!text-sm !font-normal !text-gray-700">-</p> </div> </div>
+                 <div class="flex justify-between items-center mt-6 gap-2 flex-wrap"> <button id="goto-history-btn" class="btn-link !mt-0">הצג היסטוריה</button> <button id="goto-plan-btn" class="btn-link !mt-0">ערוך תכנון עתידי</button> <button id="record-purchase-btn" class="btn-primary !w-auto grow sm:grow-0">תיעוד רכישה</button> </div>
+                 <div class="flex justify-center mt-2"> <button id="adjust-count-btn" class="btn-secondary !text-xs !py-1 !px-2 !mt-2 !w-auto">התאם כמות נוכחית</button> </div>
+                 <button id="reset-data-btn" class="btn-danger text-xs !mt-6">אפס נתוני משתמש זה</button>
+            </div>
+        </div>
+        <div id="page-history" class="page">
+             <h1 class="text-xl font-bold text-center mb-4">היסטוריית צריכה</h1>
+             <div id="history-content" class="page-content-area"> <p class="text-center text-gray-500">טוען היסטוריה...</p> </div>
+             <p class="text-xs text-gray-500 mt-2 text-center">מחיקת שורה תוסיף את הכמות בחזרה למלאי.</p>
+             <button id="back-to-dashboard-from-history" class="btn-secondary mt-6">חזור לדף הראשי</button>
+        </div>
+        <div id="page-plan" class="page">
+              <h1 class="text-xl font-bold text-center mb-4">תכנון צריכה עתידי</h1>
+              <div id="plan-content" class="page-content-area"> <p class="text-center text-gray-500">טוען תוכנית...</p> </div>
+               <p class="text-xs text-gray-500 mt-2 text-center"> שנה את הכמות המתוכננת לימים ספציפיים. ברירת המחדל: 2 (1 בשבת).</p>
+              <button id="back-to-dashboard-from-plan" class="btn-secondary mt-6">חזור לדף הראשי</button>
+        </div>
+    </div> <div id="purchase-modal" class="modal"> <div class="modal-content"> <h2 id="purchase-modal-title" class="text-xl font-bold mb-4">תיעוד רכישה</h2> <div> <label for="purchase-date">תאריך רכישה:</label> <input type="date" id="purchase-date"> </div> <div> <label for="pills-added">כמות כדורים שנוספו:</label> <input type="number" id="pills-added" min="1" step="1" inputmode="numeric" pattern="[0-9]*"> </div> <div id="initial-count-section" style="display: none;"> <label for="initial-pills-count">כמות נוכחית *לאחר* הרכישה:</label> <input type="number" id="initial-pills-count" min="0" step="1" inputmode="numeric" pattern="[0-9]*"> </div> <div class="modal-buttons"> <button id="save-purchase-btn" class="btn-primary">שמירה</button> <button id="cancel-purchase-btn" class="btn-secondary">ביטול</button> </div> </div> </div>
+     <div id="adjust-modal" class="modal"> <div class="modal-content"> <h2 class="text-xl font-bold mb-4">התאמת כמות נוכחית</h2> <div> <label for="adjust-pills-count">כמות כדורים נוכחית בפועל:</label> <input type="number" id="adjust-pills-count" min="0" step="1" inputmode="numeric" pattern="[0-9]*"> </div> <div class="modal-buttons"> <button id="save-adjust-btn" class="btn-primary">שמור כמות</button> <button id="cancel-adjust-btn" class="btn-secondary">ביטול</button> </div> </div> </div>
+     <div id="log-other-modal" class="modal"> <div class="modal-content"> <h2 class="text-xl font-bold mb-4">תיעוד כמות אחרת (היום)</h2> <div> <label for="log-other-amount">כמה כדורים לקחת היום?</label> <input type="number" id="log-other-amount" min="0" step="1" inputmode="numeric" pattern="[0-9]*"> </div> <div class="modal-buttons"> <button id="save-log-other-btn" class="btn-primary">תעד</button> <button id="cancel-log-other-btn" class="btn-secondary">ביטול</button> </div> </div> </div>
+</body>
+</html>

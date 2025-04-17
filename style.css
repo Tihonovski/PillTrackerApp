@@ -1,0 +1,266 @@
+/* Basic body styling using Assistant font and centering */
+body {
+    font-family: 'Assistant', sans-serif;
+    background-color: #f7fafc; /* Tailwind bg-gray-50 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    color: #2d3748; /* Tailwind text-gray-800 */
+}
+
+/* Container for the main content and auth */
+.container {
+    width: 100%;
+    max-width: 450px; /* Slightly wider max-width */
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem; /* Tailwind rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind shadow-md */
+    margin-top: 1rem;
+}
+
+/* Auth container specific style */
+#auth-container {
+    margin-bottom: 1rem; /* Add space below auth */
+    margin-top: 0; /* Remove top margin for auth container */
+}
+
+
+/* Page visibility control */
+.page {
+    display: none; /* Hide pages by default */
+}
+.page.active {
+    display: block; /* Show active page */
+}
+
+/* Common style for page content areas (History, Plan) */
+.page-content-area {
+     max-height: 65vh; /* Limit height */
+     overflow-y: auto;
+     border: 1px solid #e2e8f0; /* Add border around scrollable area */
+     border-radius: 0.5rem;
+     padding: 0.5rem; /* Add some padding inside */
+     margin-top: 1rem;
+}
+
+
+/* Styling for status display boxes */
+.status-item {
+    background-color: #edf2f7; /* Tailwind bg-gray-200 */
+    padding: 1rem;
+    border-radius: 0.5rem; /* Tailwind rounded-lg */
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.status-item h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4a5568; /* Tailwind text-gray-600 */
+    margin-bottom: 0.25rem;
+}
+.status-item p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c5282; /* Tailwind text-blue-800 */
+    line-height: 1.2; /* Adjust line height for large text */
+    word-break: break-word; /* Prevent overflow */
+}
+.status-item .subtext {
+    font-size: 0.8rem;
+    color: #718096; /* Tailwind text-gray-500 */
+    margin-top: 0.25rem;
+}
+
+/* General button styling */
+button {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem; /* Tailwind rounded-lg */
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Added transitions */
+    margin-top: 0.5rem;
+    border: none;
+    width: 100%; /* Default to full width */
+    font-family: 'Assistant', sans-serif; /* Ensure font consistency */
+}
+
+/* Specific button styles */
+.btn-primary { background-color: #4299e1; color: white; } /* Tailwind bg-blue-500 */
+.btn-primary:hover { background-color: #3182ce; } /* Tailwind bg-blue-600 */
+.btn-secondary { background-color: #e2e8f0; color: #4a5568; border: 1px solid #cbd5e0; } /* Tailwind bg-gray-300 */
+.btn-secondary:hover { background-color: #cbd5e0; } /* Tailwind bg-gray-400 */
+.btn-tertiary { background-color: #f0fff4; color: #38a169; border: 1px solid #9ae6b4; } /* Tailwind bg-green-50, text-green-700, border-green-300 */
+.btn-tertiary:hover { background-color: #c6f6d5; } /* Tailwind bg-green-200 */
+.btn-danger { background-color: #fed7d7; color: #c53030; border: 1px solid #feb2b2; } /* Tailwind bg-red-200, text-red-700, border-red-300 */
+.btn-danger:hover { background-color: #fbb6b6; } /* Tailwind bg-red-300 */
+.btn-link { background: none; border: none; color: #4299e1; text-decoration: underline; padding: 0.25rem; margin-top: 1rem; width: auto; font-weight: normal; } /* Tailwind text-blue-500 */
+.btn-link:hover { color: #3182ce; } /* Tailwind text-blue-600 */
+
+/* Button group for logging */
+.log-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+.log-buttons button {
+    flex-grow: 1;
+    width: auto; /* Override full width */
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    z-index: 50; /* Ensure modal is on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.modal.active {
+    display: flex; /* Show active modal */
+}
+.modal-content {
+    background-color: #fefefe;
+    padding: 1.5rem;
+    border-radius: 0.75rem; /* Tailwind rounded-xl */
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
+}
+.modal-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #4a5568; /* Tailwind text-gray-600 */
+}
+.modal-content input[type="date"],
+.modal-content input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #cbd5e0; /* Tailwind border-gray-300 */
+    border-radius: 0.375rem; /* Tailwind rounded-md */
+    margin-bottom: 1rem;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+.modal-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Hide number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+/* History Table styling */
+#history-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-top: 1rem; */ /* Removed margin top, handled by container */
+}
+#history-table th,
+#history-table td {
+    border: 1px solid #e2e8f0; /* Tailwind border-gray-300 */
+    padding: 0.5rem;
+    text-align: right;
+    font-size: 0.9rem;
+    vertical-align: middle; /* Align text vertically */
+}
+#history-table th {
+    background-color: #edf2f7; /* Tailwind bg-gray-200 */
+    font-weight: 600;
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top of the scrollable container */
+    z-index: 10; /* Ensure header is above table content */
+}
+#history-table td:last-child { /* Action cell */
+    text-align: center;
+}
+#history-table .delete-log-btn {
+    background-color: #fed7d7; /* Tailwind bg-red-200 */
+    color: #c53030; /* Tailwind text-red-700 */
+    border: none;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 0.25rem; /* Tailwind rounded-sm */
+    cursor: pointer;
+    margin: 0; /* Reset margin */
+    width: auto; /* Override default button width */
+}
+#history-table .delete-log-btn:hover {
+     background-color: #fbb6b6; /* Tailwind bg-red-300 */
+}
+
+/* Planning Table Styling */
+#plan-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* margin-top: 1rem; */ /* Removed margin top, handled by container */
+}
+#plan-table th,
+#plan-table td {
+    border: 1px solid #e2e8f0; /* Tailwind border-gray-300 */
+    padding: 0.4rem 0.5rem; /* Adjust padding */
+    text-align: right;
+    font-size: 0.9rem;
+    vertical-align: middle;
+}
+#plan-table th {
+    background-color: #edf2f7; /* Tailwind bg-gray-200 */
+    font-weight: 600;
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top of the scrollable container */
+    z-index: 10; /* Ensure header is above table content */
+}
+#plan-table td:last-child { /* Buttons cell */
+    text-align: center;
+    white-space: nowrap; /* Prevent buttons from wrapping */
+}
+
+/* Buttons within the planning table */
+.plan-amount-btn {
+    display: inline-block;
+    min-width: 28px; /* Ensure buttons have minimum width */
+    padding: 0.25rem 0.4rem; /* Smaller padding */
+    font-size: 0.85rem;
+    margin: 0 0.1rem; /* Small margin between buttons */
+    border: 1px solid #cbd5e0; /* Default border */
+    border-radius: 0.375rem; /* rounded-md */
+    background-color: #f8fafc; /* bg-gray-50 */
+    color: #4a5568; /* text-gray-600 */
+    cursor: pointer;
+    width: auto; /* Override default button width */
+    margin-top: 0; /* Override default margin */
+}
+.plan-amount-btn:hover {
+    background-color: #e2e8f0; /* bg-gray-200 */
+}
+.plan-amount-btn.selected {
+    background-color: #63b3ed; /* bg-blue-400 */
+    color: white;
+    border-color: #4299e1; /* border-blue-500 */
+    font-weight: 700;
+}
+/* Style for Saturday rows in plan table */
+#plan-table tr.saturday-row td {
+    background-color: #f7fafc; /* bg-gray-50 */
+}
