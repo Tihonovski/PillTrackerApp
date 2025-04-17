@@ -10,257 +10,187 @@ body {
     color: #2d3748; /* Tailwind text-gray-800 */
 }
 
-/* Container for the main content and auth */
+/* Main content container */
 .container {
     width: 100%;
-    max-width: 450px; /* Slightly wider max-width */
+    max-width: 500px; /* Slightly wider for better layout */
     background-color: white;
-    padding: 1.5rem;
-    border-radius: 0.75rem; /* Tailwind rounded-xl */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind shadow-md */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
     margin-top: 1rem;
 }
 
-/* Auth container specific style */
-#auth-container {
-    margin-bottom: 1rem; /* Add space below auth */
-    margin-top: 0; /* Remove top margin for auth container */
+/* Authentication Bar Styling (Subtle) */
+.auth-bar {
+    width: 100%;
+    max-width: 500px; /* Match container width */
+    padding: 0.5rem 1.5rem; /* py-2 px-6 */
+    margin-bottom: 0.5rem; /* Smaller margin */
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0; /* border-gray-300 */
+    background-color: white; /* Match container */
+    border-radius: 0.75rem 0.75rem 0 0; /* Rounded top corners */
+}
+/* Remove container styles from auth if applied directly */
+#auth-container.container { /* Fallback if container class was added */
+    padding: 0; box-shadow: none; border-radius: 0; margin-top: 0; margin-bottom: 0; background: none; border-bottom: none;
 }
 
 
 /* Page visibility control */
-.page {
-    display: none; /* Hide pages by default */
-}
-.page.active {
-    display: block; /* Show active page */
-}
+.page { display: none; }
+.page.active { display: block; }
 
 /* Common style for page content areas (History, Plan) */
 .page-content-area {
      max-height: 65vh; /* Limit height */
      overflow-y: auto;
      border: 1px solid #e2e8f0; /* Add border around scrollable area */
-     border-radius: 0.5rem;
-     padding: 0.5rem; /* Add some padding inside */
-     margin-top: 1rem;
+     border-radius: 0.5rem; /* rounded-lg */
+     padding: 0.5rem; /* p-2 */
+     margin-top: 1rem; /* mt-4 */
 }
 
 
-/* Styling for status display boxes */
-.status-item {
-    background-color: #edf2f7; /* Tailwind bg-gray-200 */
-    padding: 1rem;
-    border-radius: 0.5rem; /* Tailwind rounded-lg */
-    margin-bottom: 1rem;
+/* Styling for new status display cards */
+.status-card {
+    background-color: #f8fafc; /* bg-slate-50 or bg-gray-50 */
+    padding: 1rem; /* p-4 */
+    border-radius: 0.5rem; /* rounded-lg */
     text-align: center;
+    border: 1px solid #e2e8f0; /* border-gray-300 */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space */
+    min-height: 130px; /* Give cards a minimum height */
 }
-.status-item h2 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #4a5568; /* Tailwind text-gray-600 */
-    margin-bottom: 0.25rem;
+.status-title {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 600; /* font-semibold */
+    color: #475569; /* text-slate-600 */
+    margin-bottom: 0.5rem; /* mb-2 */
 }
-.status-item p {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #2c5282; /* Tailwind text-blue-800 */
-    line-height: 1.2; /* Adjust line height for large text */
-    word-break: break-word; /* Prevent overflow */
+.status-value {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    color: #1d4ed8; /* text-blue-700 */
+    line-height: 1.2;
+    word-break: break-word;
+    margin-bottom: 0.25rem; /* mb-1 */
 }
-.status-item .subtext {
-    font-size: 0.8rem;
-    color: #718096; /* Tailwind text-gray-500 */
-    margin-top: 0.25rem;
+.status-subtext {
+    font-size: 0.75rem; /* text-xs */
+    color: #64748b; /* text-slate-500 */
+    margin-top: 0.1rem;
 }
 
 /* General button styling */
 button {
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem; /* Tailwind rounded-lg */
+    padding: 0.6rem 1rem; /* Adjusted padding */
+    border-radius: 0.375rem; /* rounded-md */
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Added transitions */
-    margin-top: 0.5rem;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    margin-top: 0.5rem; /* mt-2 */
     border: none;
     width: 100%; /* Default to full width */
-    font-family: 'Assistant', sans-serif; /* Ensure font consistency */
+    font-family: 'Assistant', sans-serif;
+    line-height: 1.25; /* Adjust line height */
+}
+/* Prevent double borders on buttons with existing borders */
+button.btn-secondary, button.btn-tertiary, button.btn-danger, button.btn-primary-outline {
+    border-width: 1px;
 }
 
 /* Specific button styles */
-.btn-primary { background-color: #4299e1; color: white; } /* Tailwind bg-blue-500 */
-.btn-primary:hover { background-color: #3182ce; } /* Tailwind bg-blue-600 */
-.btn-secondary { background-color: #e2e8f0; color: #4a5568; border: 1px solid #cbd5e0; } /* Tailwind bg-gray-300 */
-.btn-secondary:hover { background-color: #cbd5e0; } /* Tailwind bg-gray-400 */
-.btn-tertiary { background-color: #f0fff4; color: #38a169; border: 1px solid #9ae6b4; } /* Tailwind bg-green-50, text-green-700, border-green-300 */
-.btn-tertiary:hover { background-color: #c6f6d5; } /* Tailwind bg-green-200 */
-.btn-danger { background-color: #fed7d7; color: #c53030; border: 1px solid #feb2b2; } /* Tailwind bg-red-200, text-red-700, border-red-300 */
-.btn-danger:hover { background-color: #fbb6b6; } /* Tailwind bg-red-300 */
-.btn-link { background: none; border: none; color: #4299e1; text-decoration: underline; padding: 0.25rem; margin-top: 1rem; width: auto; font-weight: normal; } /* Tailwind text-blue-500 */
-.btn-link:hover { color: #3182ce; } /* Tailwind text-blue-600 */
+.btn-primary { background-color: #3b82f6; color: white; } /* Tailwind bg-blue-500 */
+.btn-primary:hover { background-color: #2563eb; } /* Tailwind bg-blue-600 */
+
+.btn-secondary { background-color: #f1f5f9; color: #475569; border-color: #cbd5e0; } /* Tailwind bg-slate-100, text-slate-600, border-slate-300 */
+.btn-secondary:hover { background-color: #e2e8f0; } /* Tailwind bg-slate-200 */
+
+/* Outline button for login */
+.btn-primary-outline { background-color: white; color: #3b82f6; border-color: #3b82f6; }
+.btn-primary-outline:hover { background-color: #eff6ff; }
+
+.btn-tertiary { background-color: #f0fdf4; color: #16a34a; border-color: #86efac; } /* Tailwind bg-green-50, text-green-600, border-green-300 */
+.btn-tertiary:hover { background-color: #dcfce7; } /* Tailwind bg-green-100 */
+
+.btn-danger { background-color: #fee2e2; color: #dc2626; border-color: #fca5a5; } /* Tailwind bg-red-100, text-red-600, border-red-300 */
+.btn-danger:hover { background-color: #fecaca; } /* Tailwind bg-red-200 */
+
+.btn-link { background: none; border: none; color: #3b82f6; text-decoration: underline; padding: 0.25rem; margin-top: 0.5rem; width: auto; font-weight: normal; }
+.btn-link:hover { color: #2563eb; }
+
+/* Smaller button variant */
+.btn-small {
+    padding: 0.25rem 0.75rem !important; /* py-1 px-3 */
+    font-size: 0.75rem !important; /* text-xs */
+    margin-top: 0 !important; /* Override margin */
+    width: auto !important; /* Auto width */
+    display: inline-block; /* Allow auto width */
+}
+
 
 /* Button group for logging */
-.log-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-}
-.log-buttons button {
-    flex-grow: 1;
-    width: auto; /* Override full width */
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-}
+.log-buttons { display: flex; gap: 0.5rem; margin-top: 0.5rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+.log-buttons button { flex-grow: 1; width: auto; padding: 0.5rem 0.75rem; font-size: 0.875rem; margin-top: 0; }
 
-/* Modal styling */
-.modal {
-    position: fixed;
-    z-index: 50; /* Ensure modal is on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-    display: none; /* Hidden by default */
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-}
-.modal.active {
-    display: flex; /* Show active modal */
-}
-.modal-content {
-    background-color: #fefefe;
-    padding: 1.5rem;
-    border-radius: 0.75rem; /* Tailwind rounded-xl */
-    width: 100%;
-    max-width: 350px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
-}
-.modal-content label {
-    display: block;
-    margin-bottom: 0.5rem;
+/* Modal styling (Unchanged) */
+.modal { position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; padding: 1rem; }
+.modal.active { display: flex; }
+.modal-content { background-color: #fefefe; padding: 1.5rem; border-radius: 0.75rem; width: 100%; max-width: 350px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.modal-content label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #4a5568; }
+.modal-content input[type="date"], .modal-content input[type="number"], .modal-content input[type="datetime-local"] { width: 100%; padding: 0.5rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; margin-bottom: 1rem; box-sizing: border-box; }
+.modal-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; } input[type=number] { -moz-appearance: textfield; }
+
+/* History & Plan Table styling */
+#history-table, #plan-table { width: 100%; border-collapse: collapse; }
+#history-table th, #history-table td,
+#plan-table th, #plan-table td { border: 1px solid #e2e8f0; padding: 0.5rem; text-align: right; font-size: 0.9rem; vertical-align: middle; }
+#history-table th, #plan-table th {
+    background-color: #f1f5f9; /* bg-slate-100 - Opaque background for sticky header */
     font-weight: 600;
-    color: #4a5568; /* Tailwind text-gray-600 */
+    position: sticky;
+    top: -1px; /* Adjust slightly for border */
+    z-index: 10;
 }
-.modal-content input[type="date"],
-.modal-content input[type="number"] {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #cbd5e0; /* Tailwind border-gray-300 */
-    border-radius: 0.375rem; /* Tailwind rounded-md */
-    margin-bottom: 1rem;
-    box-sizing: border-box; /* Include padding and border in element's total width and height */
+#history-table td:last-child, #plan-table td:last-child { text-align: center; } /* Action/Button cell */
+
+/* Action buttons within History table */
+.history-actions button {
+     margin: 0 0.15rem; /* Add space between buttons */
+     width: auto; /* Allow button to size to content */
+     padding: 0.25rem 0.5rem;
+     font-size: 0.8rem;
+     margin-top: 0;
 }
-.modal-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
+.edit-log-btn {
+     background-color: #f1f5f9; /* bg-slate-100 */
+     color: #475569; /* text-slate-600 */
+     border: 1px solid #cbd5e0;
+}
+.edit-log-btn:hover {
+     background-color: #e2e8f0; /* bg-slate-200 */
+}
+.delete-log-btn {
+    background-color: #fee2e2; /* bg-red-100 */
+    color: #dc2626; /* text-red-600 */
+    border: 1px solid #fca5a5;
+}
+.delete-log-btn:hover {
+     background-color: #fecaca; /* bg-red-200 */
 }
 
-/* Hide number input spinners */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type=number] {
-    -moz-appearance: textfield; /* Firefox */
-}
 
-/* History Table styling */
-#history-table {
-    width: 100%;
-    border-collapse: collapse;
-    /* margin-top: 1rem; */ /* Removed margin top, handled by container */
-}
-#history-table th,
-#history-table td {
-    border: 1px solid #e2e8f0; /* Tailwind border-gray-300 */
-    padding: 0.5rem;
-    text-align: right;
-    font-size: 0.9rem;
-    vertical-align: middle; /* Align text vertically */
-}
-#history-table th {
-    background-color: #edf2f7; /* Tailwind bg-gray-200 */
-    font-weight: 600;
-    position: sticky; /* Make header sticky */
-    top: 0; /* Stick to the top of the scrollable container */
-    z-index: 10; /* Ensure header is above table content */
-}
-#history-table td:last-child { /* Action cell */
-    text-align: center;
-}
-#history-table .delete-log-btn {
-    background-color: #fed7d7; /* Tailwind bg-red-200 */
-    color: #c53030; /* Tailwind text-red-700 */
-    border: none;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
-    border-radius: 0.25rem; /* Tailwind rounded-sm */
-    cursor: pointer;
-    margin: 0; /* Reset margin */
-    width: auto; /* Override default button width */
-}
-#history-table .delete-log-btn:hover {
-     background-color: #fbb6b6; /* Tailwind bg-red-300 */
-}
-
-/* Planning Table Styling */
-#plan-table {
-    width: 100%;
-    border-collapse: collapse;
-    /* margin-top: 1rem; */ /* Removed margin top, handled by container */
-}
-#plan-table th,
-#plan-table td {
-    border: 1px solid #e2e8f0; /* Tailwind border-gray-300 */
-    padding: 0.4rem 0.5rem; /* Adjust padding */
-    text-align: right;
-    font-size: 0.9rem;
-    vertical-align: middle;
-}
-#plan-table th {
-    background-color: #edf2f7; /* Tailwind bg-gray-200 */
-    font-weight: 600;
-    position: sticky; /* Make header sticky */
-    top: 0; /* Stick to the top of the scrollable container */
-    z-index: 10; /* Ensure header is above table content */
-}
-#plan-table td:last-child { /* Buttons cell */
-    text-align: center;
-    white-space: nowrap; /* Prevent buttons from wrapping */
-}
-
-/* Buttons within the planning table */
-.plan-amount-btn {
-    display: inline-block;
-    min-width: 28px; /* Ensure buttons have minimum width */
-    padding: 0.25rem 0.4rem; /* Smaller padding */
-    font-size: 0.85rem;
-    margin: 0 0.1rem; /* Small margin between buttons */
-    border: 1px solid #cbd5e0; /* Default border */
-    border-radius: 0.375rem; /* rounded-md */
-    background-color: #f8fafc; /* bg-gray-50 */
-    color: #4a5568; /* text-gray-600 */
-    cursor: pointer;
-    width: auto; /* Override default button width */
-    margin-top: 0; /* Override default margin */
-}
-.plan-amount-btn:hover {
-    background-color: #e2e8f0; /* bg-gray-200 */
-}
-.plan-amount-btn.selected {
-    background-color: #63b3ed; /* bg-blue-400 */
-    color: white;
-    border-color: #4299e1; /* border-blue-500 */
-    font-weight: 700;
-}
-/* Style for Saturday rows in plan table */
-#plan-table tr.saturday-row td {
-    background-color: #f7fafc; /* bg-gray-50 */
-}
+/* Planning Table Specifics */
+#plan-table td:last-child { white-space: nowrap; }
+.plan-amount-btn { display: inline-block; min-width: 28px; padding: 0.25rem 0.4rem; font-size: 0.85rem; margin: 0 0.1rem; border: 1px solid #cbd5e0; border-radius: 0.375rem; background-color: #f8fafc; color: #4a5568; cursor: pointer; width: auto; margin-top: 0; }
+.plan-amount-btn:hover { background-color: #e2e8f0; }
+.plan-amount-btn.selected { background-color: #60a5fa; color: white; border-color: #3b82f6; font-weight: 700; }
+#plan-table tr.saturday-row td { background-color: #f8fafc; }
